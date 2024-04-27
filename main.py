@@ -1,23 +1,8 @@
-import cv2
-import keyboard
-import pyautogui
-import numpy as np
+from screenRecorder import ScreenRecorder
 
-fps = 30
-tamanho_tela = tuple(pyautogui.size())
-codec = cv2.VideoWriter_fourcc(*"XVID")
-video = cv2.VideoWriter("video.avi", codec, fps, tamanho_tela)
 
-while True:
-    frame = pyautogui.screenshot()
-    frame = np.array(frame)
-
-    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-
-    video.write(frame)
-
-    if keyboard.is_pressed("esc"):
-        break
-
-video.release()
-cv2.destroyAllWindows()
+if __name__ == '__main__':
+    video_name = input('Digite o nome do Video a ser gravado:') or 'screen'
+    video_format = input('Digite o nome do formato a ser gravado:') or 'mp4'
+    screenRecorder = ScreenRecorder(video_name, video_format)
+    screenRecorder.record()
